@@ -20,10 +20,10 @@ Set the installation prefix. In this case, use the current folder
 and run
 
 ```sh
-export RTEMS_HOME=$(pwd)/rtems/5
+export RTEMS_INST_PREFIX=$(pwd)/rtems/5
 ```
 
-Test with `echo $RTEMS_HOME`
+Test with `echo $RTEMS_INST_PREFIX`
 
 ### 2. Obtain the sources
 
@@ -43,7 +43,7 @@ as long as the `RTEMS_HOME` variable has been set properly.
 
 ```sh
 cd src/rsb/rtems
-../source-builder/sb-set-builder --prefix=$RTEMS_HOME 5/rtems-sparc
+../source-builder/sb-set-builder --prefix=$RTEMS_INST_PREFIX 5/rtems-sparc
 ```
 
 Succesfull installation can be verified with
