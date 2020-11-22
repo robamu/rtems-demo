@@ -1,0 +1,6 @@
+build
+.lock*
+.waf*
+
+# It is assumed that the rtems toolchain is configured and built in this folder
+toolchain
