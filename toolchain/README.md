@@ -3,7 +3,7 @@
 I built the RTEMS toolchain in this folder like
 specified in the [Quick Start](https://docs.rtems.org/branches/master/user/start/index.html).
 
-The toolchain path inside the repository will be referred with `$RTEMS_HOME`.
+The toolchain path inside the repository will be referred with `$RTEMS_TOOLS`.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ export PYTHONIOENCODING=UTF-8
 ### 1. Setting installation prefix
 
 Set the installation prefix. In this case, use the current folder
-and run the following command inside the `$RTEMS_HOME` path.
+and run the following command inside the `$RTEMS_TOOLS` path.
 
 ```sh
 export RTEMS_INST=$(pwd)/rtems/5
@@ -46,8 +46,8 @@ Test with `echo $RTEMS_INST`
 ### 2. Obtain the sources
 
 I used the Releases for now as specified in 
-[the quickstart guide](https://docs.rtems.org/branches/master/user/start/sources.html)
-Navigate into `$RTEMS_HOME` first.
+[the quickstart guide](https://docs.rtems.org/branches/master/user/start/sources.html).
+Navigate into `$RTEMS_TOOLS` first.
 
 #### Way 1: Git
 ```sh
@@ -73,16 +73,16 @@ mv rtems-source-builder5.1 rsb
 
 A list of available build sats can be shown with with
 ```sh
-cd $RTEMS_HOME/src/rsb/rtems
+cd $RTEMS_TOOLS/src/rsb/rtems
 ../source-builder/sb-set-builder --list-bsets
 ```
 
 Installation is performed with the following command
-as long as the `RTEMS_HOME` variable has been set properly.
+as long as the `RTEMS_INST` variable has been set properly.
 Replace 5 with 6 when using newest git sources.
 
 ```sh
-cd $RTEMS_HOME/src/rsb/rtems
+cd $RTEMS_TOOLS/src/rsb/rtems
 ../source-builder/sb-set-builder --prefix=$RTEMS_INST 5/rtems-sparc
 ```
 
