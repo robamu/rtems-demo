@@ -30,6 +30,15 @@ Test with `echo $RTEMS_INST`
 I used the Releases for now as specified in 
 [the quickstart guide](https://docs.rtems.org/branches/master/user/start/sources.html)
 
+#### Way 1: Git
+```sh
+mkdir src
+cd src
+git clone git://git.rtems.org/rtems-source-builder.git rsb
+git clone git://git.rtems.org/rtems.git
+```
+
+#### Way 2: Package
 ```sh
 mkdir src
 cd src
