@@ -46,6 +46,11 @@ cd src
 curl https://ftp.rtems.org/pub/rtems/releases/5/5.1/sources/rtems-source-builder-5.1.tar.xz | tar xJf -
 ```
 
+After that, the folder can be renamed 
+```sh
+mv rtems-source-builder5.1 rsb
+```
+
 ### 3. Install the Tool Suite
 
 Installation is performed with the following command
