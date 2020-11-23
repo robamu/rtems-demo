@@ -68,8 +68,15 @@ mv rtems-source-builder5.1 rsb
 
 ### 3. Install the Tool Suite
 
+A list of available build sats can be shown with with
+```sh
+cd src/rsb/rtems
+../source-builder/sb-set-builder --list-bsets
+```
+
 Installation is performed with the following command
 as long as the `RTEMS_HOME` variable has been set properly.
+Replace 5 with 6 when using newest git sources.
 
 ```sh
 cd src/rsb/rtems
