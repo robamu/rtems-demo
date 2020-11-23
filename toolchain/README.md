@@ -3,6 +3,8 @@
 I built the RTEMS toolchain in this folder like
 specified in the [Quick Start](https://docs.rtems.org/branches/master/user/start/index.html).
 
+The toolchain path inside the repository will be referred with `$RTEMS_HOME`.
+
 ## Prerequisites
 
 ### Ubuntu
@@ -33,7 +35,7 @@ export PYTHONIOENCODING=UTF-8
 ### 1. Setting installation prefix
 
 Set the installation prefix. In this case, use the current folder
-and run
+and run the following command inside the `$RTEMS_HOME` path.
 
 ```sh
 export RTEMS_INST=$(pwd)/rtems/5
@@ -45,6 +47,7 @@ Test with `echo $RTEMS_INST`
 
 I used the Releases for now as specified in 
 [the quickstart guide](https://docs.rtems.org/branches/master/user/start/sources.html)
+Navigate into `$RTEMS_HOME` first.
 
 #### Way 1: Git
 ```sh
@@ -70,7 +73,7 @@ mv rtems-source-builder5.1 rsb
 
 A list of available build sats can be shown with with
 ```sh
-cd src/rsb/rtems
+cd $RTEMS_HOME/src/rsb/rtems
 ../source-builder/sb-set-builder --list-bsets
 ```
 
@@ -79,13 +82,13 @@ as long as the `RTEMS_HOME` variable has been set properly.
 Replace 5 with 6 when using newest git sources.
 
 ```sh
-cd src/rsb/rtems
+cd $RTEMS_HOME/src/rsb/rtems
 ../source-builder/sb-set-builder --prefix=$RTEMS_INST 5/rtems-sparc
 ```
 
 Succesfull installation can be verified with
 ```sh
-$RTEMS_HOME/bin/sparc-rtems5-gcc --version
+$RTEMS_INST/bin/sparc-rtems5-gcc --version
 ```
 
 ### 4. Build a Board Support Package (BSP)
