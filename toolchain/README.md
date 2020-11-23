@@ -22,6 +22,12 @@ After that, all required packages should be installed:
 pacman -S python mingw-w64-x86_64-python2 mingw-w64-x86_64-gcc bison cvs diffutils git make patch tar texinfo unzip flex
 ```
 
+If there is a problem with the encoding with the python tools, run
+
+```sh
+export PYTHONIOENCODING=UTF-8
+```
+
 ## Installing RTEMS
 
 ### 1. Setting installation prefix
