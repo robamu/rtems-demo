@@ -5,14 +5,30 @@ specified in the [Quick Start](https://docs.rtems.org/branches/master/user/start
 
 ## Prerequisites
 
-## Ubuntu
+### Ubuntu
 Flex and Bison are used. Furthermore, the python-dev package should be installed.
 
 ```sh
 sudo apt-get install flex bison python-dev
 ```
 
-## Installing RTEMS on Ubuntu
+### Windows
+
+RTEMS recommends to use MinGW64 so it is recommended to [install it](https://www.msys2.org/).
+After that, it is recommended to set an alias in `.bashrc` to the RTEMS repo path.
+After that, all required packages should be installed:
+
+```sh
+pacman -S python mingw-w64-x86_64-python2 mingw-w64-x86_64-gcc bison cvs diffutils git make patch tar texinfo unzip flex
+```
+
+If there is a problem with the encoding with the python tools, run
+
+```sh
+export PYTHONIOENCODING=UTF-8
+```
+
+## Installing RTEMS
 
 ### 1. Setting installation prefix
 
@@ -43,6 +59,11 @@ git clone git://git.rtems.org/rtems.git
 mkdir src
 cd src
 curl https://ftp.rtems.org/pub/rtems/releases/5/5.1/sources/rtems-source-builder-5.1.tar.xz | tar xJf -
+```
+
+After that, the folder can be renamed 
+```sh
+mv rtems-source-builder5.1 rsb
 ```
 
 ### 3. Install the Tool Suite
