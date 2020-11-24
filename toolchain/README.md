@@ -4,6 +4,7 @@ I built the RTEMS toolchain in this folder like
 specified in the [Quick Start](https://docs.rtems.org/branches/master/user/start/index.html).
 
 The toolchain path inside the repository will be referred with `$RTEMS_TOOLS`.
+The RTEMS version number will be referred to as `$RTEMS_VERSION`.
 
 ## Prerequisites
 
@@ -30,15 +31,16 @@ If there is a problem with the encoding with the python tools, run
 export PYTHONIOENCODING=UTF-8
 ```
 
-## Installing RTEMS
+## Installing RTEMS - Demo application
 
 ### 1. Setting installation prefix
 
 Set the installation prefix. In this case, use the current folder
 and run the following command inside the `$RTEMS_TOOLS` path.
+When using the git sources directly, it is recommended to take the RTEMS version 6.
 
 ```sh
-export RTEMS_INST=$(pwd)/rtems/5
+export RTEMS_INST=$(pwd)/rtems/$RTEMS_VERSION
 ```
 
 Test with `echo $RTEMS_INST`
@@ -79,16 +81,22 @@ cd $RTEMS_TOOLS/src/rsb/rtems
 
 Installation is performed with the following command
 as long as the `RTEMS_INST` variable has been set properly.
-Replace 5 with 6 when using newest git sources.
+Replace 6 with the RTEMS version used. For the git way, 6 was used.
 
 ```sh
 cd $RTEMS_TOOLS/src/rsb/rtems
-../source-builder/sb-set-builder --prefix=$RTEMS_INST 5/rtems-sparc
+../source-builder/sb-set-builder --prefix=$RTEMS_INST $RTEMS_VERSION/rtems-sparc
 ```
 
 Succesfull installation can be verified with
 ```sh
-$RTEMS_INST/bin/sparc-rtems5-gcc --version
+$RTEMS_INST/bin/sparc-rtems<version>-gcc --version
 ```
 
 ### 4. Build a Board Support Package (BSP)
+
+After installing the tool suite for the sparc architecture, the BSP for `erc32` should be built to produce binaries which can be run with the `erc32-sis` simulator.
+
+
+
+
