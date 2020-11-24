@@ -2,6 +2,8 @@
 # Hello world Waf script
 #
 from __future__ import print_function
+import sys
+sys.path.append('..')
 
 rtems_version = "6"
 
