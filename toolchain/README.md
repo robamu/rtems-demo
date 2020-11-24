@@ -5,6 +5,7 @@ specified in the [Quick Start](https://docs.rtems.org/branches/master/user/start
 
 The toolchain path inside the repository will be referred with `$RTEMS_TOOLS`.
 The RTEMS version number will be referred to as `$RTEMS_VERSION`.
+The path where the RTEMS Toolchains will be installed will be referred to as `$RTEMS_INST`.
 
 ## Prerequisites
 
@@ -93,10 +94,21 @@ Succesfull installation can be verified with
 $RTEMS_INST/bin/sparc-rtems<version>-gcc --version
 ```
 
-### 4. Build a Board Support Package (BSP)
+### 4. Building a Board Support Package (BSP)
 
 After installing the tool suite for the sparc architecture, the BSP for `erc32` should be built to produce binaries which can be run with the `erc32-sis` simulator.
 
+The `sparc/erc32` BSP can be built with the following command (replace 6 with whatever version number is used). Building the test is optional:
 
+```sh
+cd $RTEMS_TOOLS/src/rsb/rtems
+../source-builder/sb-set-builder --prefix=$RTEMS_INST --target=sparc-rtems6 --with-rtems-bsp=erc32 --with-rtems-tests=yes 6/rtems-kernel
+```
 
+The BSP tests can be run with the following command
+
+```sh
+cd $RTEMS_INST
+bin/rtems-test --rtems-bsp=erc32-sis sparc-rtems6/erc32/tests
+```
 
