@@ -72,7 +72,7 @@ After that, the folder can be renamed
 mv rtems-source-builder5.1 rsb
 ```
 
-### 3. Install the Tool Suite
+### 3. Installing the RTEMS sparc Tool Suite
 
 A list of available build sats can be shown with with
 ```sh
@@ -94,7 +94,7 @@ Succesfull installation can be verified with
 $RTEMS_INST/bin/sparc-rtems<version>-gcc --version
 ```
 
-### 4. Building a Board Support Package (BSP)
+### 4. Building the erc32 Board Support Package (BSP)
 
 After installing the tool suite for the sparc architecture, the BSP for `erc32` should be built to produce binaries which can be run with the `erc32-sis` simulator.
 
@@ -111,4 +111,26 @@ The BSP tests can be run with the following command
 cd $RTEMS_INST
 bin/rtems-test --rtems-bsp=erc32-sis sparc-rtems6/erc32/tests
 ```
+
+## Installing RTEMS - STM32H743ZI Nucleo Blinky
+
+Step 1 and step 2 are identical to the steps for the hello program, but the git way has to be used because the arm/stm32h7 BSP can only be found in the master branch of RTEMS.
+
+### 3. Installing the RTEMS arm Tool Suite
+
+```sh
+cd $RTENS_TOOLS/src/rtems
+../source_builder/sb-set-builder --prefix=$RTEMS_INST $RTEMS_VERSION/rtems-arm
+```
+
+Succesfull installation can be verified with
+```sh
+$RTEMS_INST/bin/arm-rtems<version>-gcc --version
+```
+
+### 4. Building the stm32h7 BSP
+
+The BSP can not be built with the source builder and has to be built directly from sources.
+
+
 
