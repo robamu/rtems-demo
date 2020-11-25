@@ -135,8 +135,16 @@ The BSP can not be built with the source builder and has to be built directly fr
 ```sh
 cp $RTEMS_TOOLS/samples/arm_stm32/config.ini $RTEMS_TOOLS/src/rtems
 ```
+To display the default BSP configure build options for the specific BSP, the following command can be used
 
-After that, the BSP is built and installed with the waf build system
+```sh
+./waf bsp_defaults --rtems-bsp=arm/stm32h7
+```
+
+The BSP is built and installed with the waf build system with the 
+following commands
+
+
 ```sh
 cd $RTEMS_TOOLS/src/rtems
 ./waf configure --prefix=$RTEMS_INST 
