@@ -48,7 +48,7 @@ cd applications/hello_stm32
 ./waf configure --rtems=$RTEMS_INST --rtems-bsp=arm/stm32h7
 ./waf
 cd build/arm-rtems6-stm32h7
-arm-rtenms6-objcopy -O blinky.exe blinky.bin
+arm-rtems6-objcopy -O binary blinky.exe blinky.bin
 ```
 
 The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop or the STM Cube Flash tools
