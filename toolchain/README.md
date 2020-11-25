@@ -119,7 +119,7 @@ Step 1 and step 2 are identical to the steps for the hello program, but the git 
 ### 3. Installing the RTEMS arm Tool Suite
 
 ```sh
-cd $RTENS_TOOLS/src/rtems
+cd $RTEMS_TOOLS/src/rsb/rtems
 ../source_builder/sb-set-builder --prefix=$RTEMS_INST $RTEMS_VERSION/rtems-arm
 ```
 
@@ -130,7 +130,17 @@ $RTEMS_INST/bin/arm-rtems<version>-gcc --version
 
 ### 4. Building the stm32h7 BSP
 
-The BSP can not be built with the source builder and has to be built directly from sources.
+The BSP can not be built with the source builder and has to be built directly from sources. As a first step, the configuration file to configure the BSP build needs to be copied to the rtems source.
 
+```sh
+cp $RTEMS_TOOLS/samples/arm_stm32/config.ini $RTEMS_TOOLS/src/rtems
+```
 
+After that, the BSP is built and installed with the waf build system
+```sh
+cd $RTEMS_TOOLS/src/rtems
+./waf configure --prefix=$RTEMS_INST 
+./waf
+./waf install
+```
 
