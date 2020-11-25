@@ -31,7 +31,6 @@ def build(bld):
     rtems.build(bld)
 
     bld(features = 'c cprogram',
-        target = 'hello.exe',
+        target = 'blinky.exe',
         cflags = '-g -O2',
-        source = ['hello.c',
-                  'init.c'])
+        source = ['init.c'])

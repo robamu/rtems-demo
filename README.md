@@ -41,4 +41,14 @@ $RTEMS_INST/bin/rtems-run --rtems-bsp=erc32-sis build/sparc-rtems6-erc32/hello.e
 ### Build demo application
 
 The STM32 application is located inside the hello_stm32 folder in the appkication folder. It is compiled with the `arm/stm32h7` BSP.
+It is assumed that the RTEMS ARM toolchain binaries have been added to the path.
 
+```sh
+cd applications/hello_stm32
+./waf configure --rtems=$RTEMS_INST --rtems-bsp=arm/stm32h7
+./waf
+cd build/arm-rtems6-stm32h7
+arm-rtenms6-objcopy -O blinky.exe blinky.bin
+```
+
+The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop or the STM Cube Flash tools
