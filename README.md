@@ -60,6 +60,8 @@ A `.project` and `.cproject` file is supplied in the blinky project to have a st
 
 It is recommended to set the `RTEMS_INST`, `RTEMS_BIN` and `RTEMS_PATH` variables in Eclipse. It should be in principle sufficient to set `RTEMS_PATH` properly. This is required so that Eclipse can find the installed toolchains and add them to the includes. The project files provide a starting point.
 
+Cleaning and performing the configuration will be done by specific build targets `configure` and `clean`, which execute the respective commands from above. The build is performed by simply running `waf` instead of `make` as the build command.
+
 The xPacks OpenOCD software will be used to flash the board. It can be installed with the xpm packet manager.
 
 1. Install npm (NodeJS on Windows)
