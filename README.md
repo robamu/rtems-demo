@@ -56,4 +56,21 @@ The resulting binary will be linked for flash memory and can be flashed via Open
 ### Use Eclipse and configure to flash with OpenOCD
 
 It is possible to use Eclipse together with the waf build system. OpenOCD was used to flash the STM32 with the binary and the debug it with `arm-rtems6-gdb` .
-A `.project` and `.cproject` file is supplied in the blinky project to have a starting point.
+A `.project` and `.cproject` file is supplied in the blinky project to have a starting point. It is recommended to copy those from the eclipse folder into the blinky folder and then import the project in Eclipse.
+
+The xPacks OpenOCD software will be used to flash the board. It can be installed with the xpm packet manager.
+
+1. Install npm (NodeJS on Windows)
+2. Install xpm
+    ```sh
+    npm install --global xpm
+    ```
+
+3. Install OpenOCD
+    ```sh
+    xpm install --global @xpack-dev-tools/openocd@latest
+    ```
+    
+4. Install the MCU plugin for Eclipse. After that, check whether the OpenOCD plugin is found in Eclipse by going to Windows &rarr; Preferences &rarr; MCU and check whether the path is found
+
+5. Add the install path of OpenOCD to the system path by adding `export PATH=$PATH:<..../@gnu-mcu-eclipse/open-ocd/<version>/.content/bin>` to the `.profile` file on Linux
