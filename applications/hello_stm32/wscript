@@ -31,4 +31,5 @@ def configure(conf):
 def build(bld):
 	rtems.build(bld)
 	bld(features = 'c cprogram', target = 'blinky.elf', cflags = '-g -O2', source = ['init.c'])
+	bld(target= 'blinky.bin', source='blinky.elf', rule = '${OBJCOPY} -O binary ${SRC} ${TGT}')
 
