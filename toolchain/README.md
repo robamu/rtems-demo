@@ -114,7 +114,12 @@ bin/rtems-test --rtems-bsp=erc32-sis sparc-rtems6/erc32/tests
 
 ## Installing RTEMS - STM32H743ZI Nucleo Blinky
 
-Step 1 and step 2 are identical to the steps for the hello program, but the git way has to be used because the arm/stm32h7 BSP can only be found in the master branch of RTEMS.
+Step 1 and step 2 are identical to the steps for the hello program, but the git way has to be used because the arm/stm32h7 BSP can only be found in the master branch of RTEMS. Also, it is recommended to 
+clone a fork of the RTEMS repo to get the correct configuration for the nucleo board:
+
+```sh
+git clone https://github.com/rmspacefish/rtems.git
+```
 
 ### 3. Installing the RTEMS arm Tool Suite
 
