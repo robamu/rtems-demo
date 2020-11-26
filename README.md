@@ -36,7 +36,7 @@ cd applications/hello
 $RTEMS_INST/bin/rtems-run --rtems-bsp=erc32-sis build/sparc-rtems6-erc32/hello.exe
 ```
 
-## STM32 Test Application
+## STM32H743ZI Nucleo Test Application
 
 ### Build demo application
 
@@ -51,12 +51,14 @@ cd applications/stm32/blinky
 
 Alternatively, the shell script `build.sh` has been provided to perform all steps at once. 
 
-The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop or the STM Cube Flash tools
+The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop (binary to connected device) or the STM Cube Flash tools.
 
 ### Use Eclipse and configure to flash with OpenOCD
 
 It is possible to use Eclipse together with the waf build system. OpenOCD was used to flash the STM32 with the binary and the debug it with `arm-rtems6-gdb` .
 A `.project` and `.cproject` file is supplied in the blinky project to have a starting point. It is recommended to copy those from the eclipse folder into the blinky folder and then import the project in Eclipse.
+
+It is recommended to set the `RTEMS_INST`, `RTEMS_BIN` and `RTEMS_PATH` variables in Eclipse. It should be in principle sufficient to set `RTEMS_PATH` properly. This is required so that Eclipse can find the installed toolchains and add them to the includes. The project files provide a starting point.
 
 The xPacks OpenOCD software will be used to flash the board. It can be installed with the xpm packet manager.
 
