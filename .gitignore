@@ -13,3 +13,7 @@ toolchain/backup
 
 # Eclipse
 .settings
+.cproject
+.project
+!**/eclipse/.project
+!**/eclipse/.cproject

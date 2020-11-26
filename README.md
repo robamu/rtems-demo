@@ -52,3 +52,8 @@ cd applications/stm32/blinky
 Alternatively, the shell script `build.sh` has been provided to perform all steps at once. 
 
 The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop or the STM Cube Flash tools
+
+### Use Eclipse and configure to flash with OpenOCD
+
+It is possible to use Eclipse together with the waf build system. OpenOCD was used to flash the STM32 with the binary and the debug it with `arm-rtems6-gdb` .
+A `.project` and `.cproject` file is supplied in the blinky project to have a starting point.
