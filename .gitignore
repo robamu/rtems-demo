@@ -7,5 +7,9 @@ toolchain/rtems
 toolchain/backup
 #toolchain/src
 
+# Python ignores
 .idea
 !.idea/runConfigurations
+
+# Eclipse
+.settings
