@@ -26,11 +26,14 @@ def options(opt):
 	rtems.options(opt)
 
 def configure(conf):
+	# conf.env.append_value('INCLUDES', ['board'])
 	rtems.configure(conf, bsp_configure = bsp_configure)
 
 def build(bld):
 	rtems.build(bld)
+	root_src = ['init.c', 'led.c']
+	board_src = ['stm32h7xx_nucleo.c']
 	bld(features = 'c cprogram', target = 'blinky.elf', cflags = '-g -O2', 
-			source = ['init.c', 'led.c'])
+			source = root_src + board_src)
 	bld(target= 'blinky.bin', source='blinky.elf', rule = '${OBJCOPY} -O binary ${SRC} ${TGT}')
 
