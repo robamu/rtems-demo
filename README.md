@@ -40,7 +40,7 @@ $RTEMS_INST/bin/rtems-run --rtems-bsp=erc32-sis build/sparc-rtems6-erc32/hello.e
 
 ### Build demo application
 
-The STM32 application is located inside the hello_stm32 folder in the appkication folder. It is compiled with the `arm/stm32h7` BSP.
+The STM32 application is located inside the stm32/blinky folder in the application folder. It is compiled with the `arm/stm32h7` BSP.
 It is assumed that the RTEMS ARM toolchain binaries have been added to the path.
 
 ```sh
