@@ -12,20 +12,26 @@
 #include <rtems.h>
 #include "led.h"
 
-rtems_task Init(
-  rtems_task_argument argument
-)
+bool printoutEnabled = false;
+
+rtems_task Init(rtems_task_argument argument)
 {
   rtems_status_code status;
 
-  LED_INIT();
+  ledInit();
 
   while (1) {
 
     (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
-    LED_OFF();
+    ledOff();
+    if(printoutEnabled) {
+    	printf("LED Off\n\r");
+    }
     (void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
-    LED_ON();
+    ledOn();
+    if(printoutEnabled) {
+    	printf("LED On\n\r");
+    }
 
   }
 

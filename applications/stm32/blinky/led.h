@@ -10,21 +10,11 @@
 
 #include "stm32h7xx_hal.h"
 
-/* Configure GPIO pin : PB14 (LD3) */   
-GPIO_InitTypeDef GPIO_InitStruct =
-{
-  .Pin = GPIO_PIN_14,  
-  .Mode = GPIO_MODE_OUTPUT_PP,
-  .Speed = GPIO_SPEED_LOW 
-};
-  
-#define LED_INIT() ({\
-   __HAL_RCC_GPIOB_CLK_ENABLE();\
-   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);\
-})
+extern GPIO_InitTypeDef GPIO_InitStruct;
 
-#define LED_ON() HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
-#define LED_OFF() HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+extern void ledInit();
+extern void ledOn();
+extern void ledOff();
 
 #else
 /* default case is to print */
