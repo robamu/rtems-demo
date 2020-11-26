@@ -44,11 +44,11 @@ The STM32 application is located inside the hello_stm32 folder in the appkicatio
 It is assumed that the RTEMS ARM toolchain binaries have been added to the path.
 
 ```sh
-cd applications/hello_stm32
+cd applications/stm32/blinky
 ./waf configure --rtems=$RTEMS_INST --rtems-bsp=arm/stm32h7
 ./waf
-cd build/arm-rtems6-stm32h7
-arm-rtems6-objcopy -O binary blinky.exe blinky.bin
 ```
+
+Alternatively, the shell script `build.sh` has been provided to perform all steps at once. 
 
 The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop or the STM Cube Flash tools
