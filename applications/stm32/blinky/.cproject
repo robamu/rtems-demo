@@ -4,8 +4,9 @@
 		<cconfiguration id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.350761513">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.350761513" moduleId="org.eclipse.cdt.core.settings" name="Default">
 				<macros>
-					<stringMacro name="RTEMS_INST" type="VALUE_TEXT" value="/home/rmueller/Documents/RTEMS/toolchain/rtems/6"/>
-					<stringMacro name="RTEMS_BIN" type="VALUE_TEXT" value="/home/rmueller/Documents/RTEMS/toolchain/rtems/6/bin"/>
+					<stringMacro name="RTEMS_INST" type="VALUE_TEXT" value="${RTEMS_PATH}/toolchain/rtems/6"/>
+					<stringMacro name="RTEMS_PATH" type="VALUE_TEXT" value="${CWD}/../../.."/>
+					<stringMacro name="RTEMS_BIN" type="VALUE_TEXT" value="${RTEMS_PATH}/toolchain/rtems/6/bin"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -109,7 +110,7 @@
 			<target name="clean" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
 				<buildCommand>/home/rmueller/Documents/RTEMS/applications/stm32/blinky/waf</buildCommand>
 				<buildArguments>clean</buildArguments>
-				<buildTarget>clean</buildTarget>
+				<buildTarget/>
 				<stopOnError>true</stopOnError>
 				<useDefaultCommand>false</useDefaultCommand>
 				<runAllBuilders>true</runAllBuilders>
