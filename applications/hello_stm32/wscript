@@ -8,6 +8,7 @@ sys.path.append('..')
 rtems_version = "6"
 
 try:
+	# from ...rtems_waf import rtems as rtems
 	import rtems_waf.rtems as rtems
 except ImportError:
 	print('error: no rtems_waf git submodule')

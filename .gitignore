@@ -7,3 +7,5 @@ toolchain/rtems
 toolchain/backup
 #toolchain/src
 
+.idea
+!.idea/runConfigurations
