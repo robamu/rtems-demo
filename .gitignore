@@ -15,5 +15,7 @@ toolchain/backup
 .settings
 .cproject
 .project
+.pydevproject
 !**/eclipse/.project
 !**/eclipse/.cproject
+!**/eclipse/.pydevproject
