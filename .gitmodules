@@ -7,3 +7,4 @@
 [submodule "toolchain/src/rsb"]
 	path = toolchain/src/rsb
 	url = https://github.com/rmspacefish/rtems-source-builder.git
+	ignore = dirty
