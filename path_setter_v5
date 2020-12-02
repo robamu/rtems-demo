@@ -1,0 +1,2 @@
+export PATH="$PATH":$(pwd)/toolchain/rtems/5/bin
+export RTEMS_INST=$(pwd)/toolchain/rtems/5

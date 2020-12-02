@@ -3,9 +3,9 @@ build
 .waf*
 
 # It is assumed that the rtems toolchain is configured and built in this folder
-toolchain/rtems
 toolchain/backup
-#toolchain/src
+toolchain/rtems
+toolchain/build
 
 # Python ignores
 .idea
