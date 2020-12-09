@@ -9,3 +9,6 @@
 	path = toolchain/src/rsb
 	url = https://github.com/rmspacefish/rtems-source-builder.git
 	ignore = dirty
+[submodule "applications/stm32/blinky/waf"]
+	path = applications/stm32/blinky/waf
+	url = https://gitlab.com/ita1024/waf.git
