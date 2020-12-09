@@ -3,7 +3,6 @@
 #
 from __future__ import print_function
 
-import os
 import sys
 sys.path.append('../..')
 
@@ -26,18 +25,31 @@ def bsp_configure(conf, arch_bsp):
 
 def options(opt):
 	rtems.options(opt)
-	opt.load('objcopy', tooldir='.')
+	opt.load('objcopy')
 
 def configure(conf):
-	# conf.env.append_value('INCLUDES', ['board'])
 	rtems.configure(conf, bsp_configure = bsp_configure)
-	conf.load('objcopy', tooldir='.')
+	# RTEMS already loads objcopy
+	# conf.load('objcopy')
+
 
 def build(bld):
 	rtems.build(bld)
 	root_src = ['init.c', 'led.c']
 	board_src = ['stm32h7xx_nucleo.c']
-	bld(features = 'c cprogram objcopy', target = 'blinky.elf', cflags = '-g -O2', 
+	target_name = "blinky"
+	target_bin_extension = ".bin"
+	target_elf_extension = ".elf"
+	target_elf_name = target_name + target_elf_extension
+	target_bin_name = target_name + target_bin_extension
+	# This works as well
+	#bld(features = 'c cprogram objcopy', target = target_elf_name, cflags = '-g -O2',
+	#		source = root_src + board_src,  objcopy_target=target_bin_name,
+	#		objcopy_bfdname='binary')
+
+	bld(features = 'c cprogram', target = target_elf_name, cflags = '-g -O2',
 			source = root_src + board_src)
-	# bld(target= 'blinky.bin', source='blinky.elf', rule = '${OBJCOPY} -O binary ${SRC} ${TGT}')
+	bld(target=target_bin_name, source=target_elf_name,
+		rule = "${OBJCOPY} -O binary ${SRC} ${TGT}",
+		cls_keyword=lambda x: "Creating binary " + target_bin_name + " from")
 
