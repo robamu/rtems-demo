@@ -2,6 +2,8 @@
 # LED blink Waf script
 #
 from __future__ import print_function
+
+import os
 import sys
 sys.path.append('../..')
 
@@ -24,16 +26,18 @@ def bsp_configure(conf, arch_bsp):
 
 def options(opt):
 	rtems.options(opt)
+	opt.load('objcopy', tooldir='.')
 
 def configure(conf):
 	# conf.env.append_value('INCLUDES', ['board'])
 	rtems.configure(conf, bsp_configure = bsp_configure)
+	conf.load('objcopy', tooldir='.')
 
 def build(bld):
 	rtems.build(bld)
 	root_src = ['init.c', 'led.c']
 	board_src = ['stm32h7xx_nucleo.c']
-	bld(features = 'c cprogram', target = 'blinky.elf', cflags = '-g -O2', 
+	bld(features = 'c cprogram objcopy', target = 'blinky.elf', cflags = '-g -O2', 
 			source = root_src + board_src)
-	bld(target= 'blinky.bin', source='blinky.elf', rule = '${OBJCOPY} -O binary ${SRC} ${TGT}')
+	# bld(target= 'blinky.bin', source='blinky.elf', rule = '${OBJCOPY} -O binary ${SRC} ${TGT}')
 
