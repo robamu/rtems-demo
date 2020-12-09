@@ -42,9 +42,12 @@ def build(bld):
 	target_elf_extension = ".elf"
 	target_elf_name = target_name + target_elf_extension
 	target_bin_name = target_name + target_bin_extension
-	# This works as well
-	#bld(features = 'c cprogram objcopy', target = target_elf_name, cflags = '-g -O2',
+	# bld(features = 'c cprogram', target = target_elf_name, cflags = '-g -O2',
 	#		source = root_src + board_src,  objcopy_target=target_bin_name,
+	#		objcopy_bfdname='binary')
+
+	# Does not work, need to link output of previous task somehow..
+	# bld(features='objcopy', objcopy_target=target_bin_name,
 	#		objcopy_bfdname='binary')
 
 	bld(features = 'c cprogram', target = target_elf_name, cflags = '-g -O2',
