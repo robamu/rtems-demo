@@ -73,13 +73,6 @@ set(CMAKE_C_COMPILER "${RTEMS_GCC}")
 set(CMAKE_CXX_COMPILER "${RTEMS_GXX}")
 set(CMAKE_ASM_COMPILER "${RTEMS_ASM}")
 
-set(RTEMS_LIB_NAME "rtems_${RTEMS_ARCH_NAME}_${RTEMS_BSP_NAME}")
-
-add_library(${RTEMS_LIB_NAME} SHARED IMPORTED)
-set_target_properties(${RTEMS_LIB_NAME}  PROPERTIES
-	IMPORTED_LOCATION ${RTEMS_BSP_LIB_PATH}
-	INTERFACE_INCLUDE_DIRECTORIES ${RTEMS_BSP_INC_PATH}
-)
 
 ############################################
 # Info output
@@ -99,32 +92,45 @@ message(STATUS "RTEMS g++ compiler: ${RTEMS_GXX}")
 # Here comes application stuff again
 
 add_executable(${CMAKE_PROJECT_NAME} init.c led.c stm32h7xx_nucleo.c)
-# target_link_libraries(${CMAKE_PROJECT_NAME} ${RTEMS_LIB_NAME})
 
-if(RTEMS_BSP STREQUAL "arm/stm32h7")
-target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC -mthumb
-	-mcpu=cortex-m7
-	-mfpu=fpv5-d16
-	-mfloat-abi=hard
+set(RTEMS_LIB_NAME "rtems_${RTEMS_ARCH_NAME}_${RTEMS_BSP_NAME}")
+add_library(${RTEMS_LIB_NAME} SHARED IMPORTED)
+set_target_properties(${RTEMS_LIB_NAME} PROPERTIES
+	IMPORTED_LOCATION ${RTEMS_BSP_LIB_PATH}
 )
 
-target_link_options(${CMAKE_PROJECT_NAME} BEFORE PUBLIC -mthumb
-	-mcpu=cortex-m7
-	-mfpu=fpv5-d16
-	-mfloat-abi=hard
+#target_link_directories(${RTEMS_LIB_NAME} INTERFACE
+#	${RTEMS_BSP_LIB_PATH}
+#)
+target_include_directories(${RTEMS_LIB_NAME} INTERFACE
+	${RTEMS_BSP_INC_PATH}
 )
-
-target_link_options(${CMAKE_PROJECT_NAME} PUBLIC
-	-I${RTEMS_BSP_INC_PATH}
-	-B${RTEMS_BSP_LIB_PATH}
+target_link_options(${RTEMS_LIB_NAME} INTERFACE
+#	-I${RTEMS_BSP_INC_PATH}
+#	-B${RTEMS_BSP_LIB_PATH}
 	-Wl,--gc-sections 
 	-Wl,-Bstatic 
 	-Wl,-Bdynamic 
 	-qrtems
 )
 
-target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
-	${RTEMS_BSP_INC_PATH}
+target_link_libraries(${CMAKE_PROJECT_NAME} ${RTEMS_LIB_NAME})
+
+if(RTEMS_BSP STREQUAL "arm/stm32h7")
+target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC 
+	-mthumb
+	-mcpu=cortex-m7
+	-mfpu=fpv5-d16
+	-mfloat-abi=hard
 )
+
+target_link_options(${CMAKE_PROJECT_NAME} BEFORE PUBLIC 
+	-mthumb
+	-mcpu=cortex-m7
+	-mfpu=fpv5-d16
+	-mfloat-abi=hard
+)
+
+
 endif()
 		
