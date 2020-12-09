@@ -17,3 +17,6 @@ CMake Target Command:
 
 arm-rtems6-gcc -mthumb -mcpu=cortex-m7 -mfpu=fpv5-d16 -mfloat-abi=hard -I=$RTEMS_INST/arm-rtems6/stm32h7/lib/include -MMD -B$RTEMS_INST/arm-rtems6/stm32h7/lib -Wl,--gc-sections init.c.o led.c.o stm32h7xx_nucleo.c.o -o blinky-test.elf -Wl,-Bstatic -Wl,-Bdynamic -qrtems
 
+Weird:
+-Wl,-rpath,/home/rmueller/Documents/RTEMS/toolchain/rtems/6/arm-rtems6/stm32h7 /home/rmueller/Documents/RTEMS/toolchain/rtems/6/arm-rtems6/stm32h7/lib 
+
