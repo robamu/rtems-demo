@@ -6,12 +6,12 @@ a folder named toolchain but I do not include them in the repo.
 The toolchain folder contains instruction on how to build the 
 toolchain if required.
 
-There is a small helper file I use to add the built `erc32` BSP
-to the path. It can be used like that
-
+There is a small helper file I use to configure the system path
+called `path_setter_v<VersionNumber>` . 
+Those can be used by running
 ```sh
-source pathhelper
-```
+source path_setter_v6
+``` 
 
 ## Demo Application
 
