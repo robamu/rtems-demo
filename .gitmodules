@@ -16,5 +16,5 @@
 	path = applications/waf
 	url = https://gitlab.com/ita1024/waf.git
 [submodule "applications/rtems_cmake"]
-	path = applications/rtems_cmake
+	path = applications/rtems-cmake
 	url = https://github.com/rmspacefish/rtems_cmake.git
