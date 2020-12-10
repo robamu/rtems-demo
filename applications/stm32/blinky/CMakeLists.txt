@@ -2,130 +2,22 @@ cmake_minimum_required(VERSION 3.13)
 
 project(blinky)
 
-add_executable(${CMAKE_PROJECT_NAME} )
+add_executable(${CMAKE_PROJECT_NAME})
 
-#############################################
-# Generic RTEMS handling
-#############################################
-
-set(RTEMS_INST "Test" CACHE STRING "RTEMS Toolchain installation path")
-set(RTEMS_BSP "sparc/erc32" CACHE STRING "RTEMS BSP")
-set(RTEMS_VERSION "6" CACHE STRING "RTEMS version")
-
-if (RTEMS_INST STREQUAL "")
-	message(FATAL_ERROR "RTEMS toolchain path has to be specified!")
-endif()  
-
-if(RTEMS_BSP STREQUAL "arm/stm32h7")
-set(RTEMS_ARCH_NAME "arm")
-set(RTEMS_BSP_NAME "stm32h7")
-
+if(NOT RTEMS_CONFIG_DIRECTORY)
+	set(RTEMS_CONFIG_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 endif()
 
-set(RTEMS_ARCH_TOOLS "${RTEMS_ARCH_NAME}-rtems${RTEMS_VERSION}")
+################################################################################
+# Load RTEMS configuration and checks
+################################################################################
 
+include(${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake)
+rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_INST} ${RTEMS_BSP})
 
-if(IS_DIRECTORY "${RTEMS_INST}/${RTEMS_ARCH_TOOLS}")
-	set(RTEMS_BSP_LIB_PATH "${RTEMS_INST}/${RTEMS_ARCH_TOOLS}/${RTEMS_BSP_NAME}/lib")
-	if(NOT IS_DIRECTORY "${RTEMS_BSP_LIB_PATH}") 
-		message(FATAL_ERROR "RTEMS BSP lib folder not found at ${RTEMS_BSP_LIB_PATH}")
-	endif()
-	set(RTEMS_BSP_INC_PATH "${RTEMS_BSP_LIB_PATH}/include")
-	if(NOT IS_DIRECTORY "${RTEMS_BSP_INC_PATH}")
-		message(FATAL_ERROR "RTEMS BSP include folder not found at ${RTEMS_BSP_INC_PATH}")
-	endif()
-else()
-	message(FATAL_ERROR "RTEMS Architecure folder not found at ${RTEMS_INST}/${RTEMS_ARCH_TOOLS}")
-endif()
-
-#####################################
-# Checking the toolchain
-#####################################
-
-set(RTEMS_BIN_PATH "${RTEMS_INST}/bin")
-if(NOT IS_DIRECTORY "${RTEMS_BIN_PATH}")
-	message(FATAL_ERROR "RTEMS binaries folder not found at ${RTEMS_INST}/bin")
-endif()
-
-set(RTEMS_GCC "${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-gcc")
-if(NOT EXISTS "${RTEMS_GCC}") 
-	message(FATAL_ERROR "RTEMS gcc compiler not found at ${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-gcc")
-endif()
-
-set(RTEMS_GXX "${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-g++")
-if(NOT EXISTS "${RTEMS_GXX}")
-	message(FATAL_ERROR "RTEMS g++ compiler not found at ${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-g++")
-endif()
-
-set(RTEMS_ASM "${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-as")
-if(NOT EXISTS "${RTEMS_GXX}")
-	message(FATAL_ERROR "RTEMS as compiler not found at ${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-as")
-endif()
-
-set(RTEMS_LD "${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-ld")
-if(NOT EXISTS "${RTEMS_LD}")
-	message(FATAL_ERROR "RTEMS ld linker  not found at ${RTEMS_BIN_PATH}/${RTEMS_ARCH_TOOLS}-ld")
-endif()
-
-if(${RTEMS_ARCH_NAME} STREQUAL "arm")
-set(CMAKE_SYSTEM_PROCESSOR arm)
-endif()
-
-set(CMAKE_C_COMPILER "${RTEMS_GCC}")
-set(CMAKE_CXX_COMPILER "${RTEMS_GXX}")
-set(CMAKE_ASM_COMPILER "${RTEMS_ASM}")
-
-############################################
-# Info output
-###########################################
-
-message(STATUS "RTEMS Version: ${RTEMS_VERSION}")
-message(STATUS "RTEMS installation path: ${RTEMS_INST}")
-message(STATUS "RTEMS Architecture tools path: ${RTEMS_ARCH_TOOLS}")
-message(STATUS "RTEMS BSP: ${RTEMS_BSP}")
-message(STATUS "RTEMS BSP LIB path: ${RTEMS_BSP_LIB_PATH}")
-message(STATUS "RTEMS BSP INC path: ${RTEMS_BSP_INC_PATH}")
-
-message(STATUS "RTEMS gcc Compiler: ${RTEMS_GCC}")
-message(STATUS "RTEMS g++ compiler: ${RTEMS_GXX}")
-
-target_link_directories(${CMAKE_PROJECT_NAME} PUBLIC
-	${RTEMS_BSP_LIB_PATH})
-target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC
-	${RTEMS_BSP_INC_PATH})
-
-########################################
-# Hardware dependent options
-########################################
-
-
-if(RTEMS_BSP STREQUAL "arm/stm32h7")
-target_compile_options(${CMAKE_PROJECT_NAME} PUBLIC 
-	-mthumb
-	-mcpu=cortex-m7
-	-mfpu=fpv5-d16
-	-mfloat-abi=hard
-)
-
-target_link_options(${CMAKE_PROJECT_NAME} BEFORE PUBLIC 
-	-mthumb
-	-mcpu=cortex-m7
-	-mfpu=fpv5-d16
-	-mfloat-abi=hard
-)
-
-target_link_options(${CMAKE_PROJECT_NAME} PUBLIC
-	-Wl,--gc-sections
-	-Wl,-Bstatic
-	-Wl,-Bdynamic
-	-qrtems
-)
-
-endif()
-
-########################################
+################################################################################
 # Application
-########################################
+################################################################################
 		
 target_sources(${CMAKE_PROJECT_NAME}
 	PUBLIC
