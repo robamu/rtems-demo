@@ -4,7 +4,7 @@ project(blinky)
 
 add_executable(${CMAKE_PROJECT_NAME})
 
-set(RTEMS_CONFIG_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../rtems_cmake" CACHE FILEPATH "Directory containing the RTEMS *.cmake files")
+set(RTEMS_CONFIG_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../rtems-cmake" CACHE FILEPATH "Directory containing the RTEMS *.cmake files")
 
 # If this directory is not set, it is assumed that the RTEMS config files are
 # located in the current directory.
