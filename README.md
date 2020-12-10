@@ -27,6 +27,17 @@ cd applications/hello
 ./waf
 ```
 
+Alternatively, build with CMake:
+
+```sh
+mkdir Debug
+cd Debug
+cmake -DRTEMS_INST=$RTEMS_INST -DRTEMS_BSP=sparc/erc32 ..
+cmake --build . 
+```
+
+
+
 ### Run demo application in simulator
 
 The demo application can be run with the following command
@@ -49,7 +60,17 @@ cd applications/stm32/blinky
 ./waf
 ```
 
-Alternatively, the shell script `build.sh` has been provided to perform all steps at once. 
+The shell script `build.sh` has been provided to perform all steps at once. 
+
+Alternatively, build with CMake:
+
+```sh
+mkdir Debug
+cd Debug
+cmake -DRTEMS_INST=$RTEMS_INST -DRTEMS_BSP=arm7stm32h7 ..
+cmake --build . 
+```
+
 
 The resulting binary will be linked for flash memory and can be flashed via OpenOCD, drag and drop (binary to connected device) or the STM Cube Flash tools.
 
