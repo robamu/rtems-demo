@@ -16,6 +16,9 @@ function(rtems_general_config TARGET_NAME RTEMS_INST RTEMS_BSP)
 	# Not an ideal solution but it will do for now because the number of 
 	# variables which need to be propagated to the upper most CMakeLists.txt
 	# should not become too high.
+	if(NOT ${CMAKE_SYSTEM_PROCESSOR} STREQUAL ${CMAKE_HOST_SYSTEM_PROCESSOR})
+		set(CMAKE_SYSTEM_PROCESSOR ${CMAKE_SYSTEM_PROCESSOR} PARENT_SCOPE)
+	endif()
 	set(CMAKE_C_COMPILER ${CMAKE_C_COMPILER} PARENT_SCOPE)
 	set(CMAKE_CXX_COMPILER ${CMAKE_CXX_COMPILER} PARENT_SCOPE)
 	set(CMAKE_ASM_COMPILER ${CMAKE_ASM_COMPILER} PARENT_SCOPE)
