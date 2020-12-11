@@ -37,7 +37,7 @@ The `$RTEMS_INST` variable shoulde be set to the RTEMS toolchain location, for e
 
 ```sh
 cd applications/hello
-./waf configure --rtems=$RTEMS_INST --rtems-bsp=sparc/erc32
+./waf configure --rtems=$RTEMS_TOOLS --rtems-bsp=sparc/erc32
 ./waf
 ```
 
@@ -46,7 +46,7 @@ Alternatively, build with CMake:
 ```sh
 mkdir Debug
 cd Debug
-cmake -DRTEMS_INST=$RTEMS_INST -DRTEMS_BSP=sparc/erc32 ..
+cmake -DRTEMS_INST=$RTEMS_TOOLS -DRTEMS_BSP=sparc/erc32 ..
 cmake --build . 
 ```
 
@@ -70,7 +70,7 @@ It is assumed that the RTEMS ARM toolchain binaries have been added to the path.
 
 ```sh
 cd applications/stm32/blinky
-./waf configure --rtems=$RTEMS_INST --rtems-bsp=arm/stm32h7
+./waf configure --rtems=$RTEMS_TOOLS --rtems-bsp=arm/stm32h7
 ./waf
 ```
 
@@ -81,7 +81,7 @@ Alternatively, build with CMake:
 ```sh
 mkdir Debug
 cd Debug
-cmake -DRTEMS_INST=$RTEMS_INST -DRTEMS_BSP=arm7stm32h7 ..
+cmake -DRTEMS_TOOLS=$RTEMS_TOOLS -DRTEMS_BSP=arm7/stm32h7 ..
 cmake --build . 
 ```
 

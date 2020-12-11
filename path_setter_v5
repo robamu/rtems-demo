@@ -1,2 +1,5 @@
 export PATH="$PATH":$(pwd)/toolchain/rtems/5/bin
-export RTEMS_INST=$(pwd)/toolchain/rtems/5
+export RTEMS_TOOLS=$(pwd)/toolchain/rtems/5
+
+export RTEMS_ARM_STM32H7_BSP=$(pwd)/toolchain/rtems/5/arm-rtems5/stm32h7
+export RTEMS_SPARC_ERC32_BSP=$(pwd)/toolchain/rtems/5/sparc-rtems5/erc32

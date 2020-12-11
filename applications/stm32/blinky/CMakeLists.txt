@@ -16,7 +16,10 @@ endif()
 # Load RTEMS configuration and checks
 ################################################################################
 
-set(RTEMS_CONFIG_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../rtems-cmake" CACHE FILEPATH "Directory containing the RTEMS *.cmake files")
+set(RTEMS_CONFIG_DIRECTORY 
+	"${CMAKE_CURRENT_SOURCE_DIR}/../../rtems-cmake"
+	 CACHE FILEPATH "Directory containing the RTEMS *.cmake files"
+)
 
 # If this directory is not set, it is assumed that the RTEMS config files are
 # located in the current directory.
@@ -25,7 +28,10 @@ if(NOT RTEMS_CONFIG_DIRECTORY)
 endif()
 
 if(NOT EXISTS ${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake) 
-	message(FATAL_ERROR "RTEMS configuration not found at ${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake")
+	message(FATAL_ERROR 
+		"RTEMS configuration not found at"
+		"${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake"
+	)
 endif()
 
 # Sanity checks
@@ -40,7 +46,9 @@ endif()
 include("${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake")
 
 if(DEFINED RTEMS_BSP_PATH)
-rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP} ${RTEMS_BSP_PATH})
+rtems_general_config(
+	${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP} ${RTEMS_BSP_PATH}
+)
 else()
 rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP})
 endif()
