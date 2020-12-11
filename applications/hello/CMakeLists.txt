@@ -1,10 +1,16 @@
 cmake_minimum_required(VERSION 3.15) 
 
+# Disable these checks for RTEMS cross compiling, 
+# which would be performed on the standard compiler
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_C_COMPILER_WORKS 1)
+set(CMAKE_CXX_COMPILER_WORKS 1)
+set(CMAKE_CROSSCOMPILING 1)
+
 project(hello)
 add_executable(${CMAKE_PROJECT_NAME})
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
-
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
 
 ################################################################################
