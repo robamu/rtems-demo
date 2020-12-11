@@ -1,7 +1,9 @@
-cmake_minimum_required(VERSION 3.13) 
+cmake_minimum_required(VERSION 3.15) 
 
 project(hello)
 add_executable(${CMAKE_PROJECT_NAME})
+
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
 
 ################################################################################
 # Generic Project configuration
