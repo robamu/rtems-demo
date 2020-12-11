@@ -38,7 +38,12 @@ if(NOT RTEMS_BSP)
 endif()
 
 include("${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake")
+
+if(DEFINED RTEMS_BSP_PATH)
+rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP} ${RTEMS_BSP_PATH})
+else()
 rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP})
+endif()
 
 ################################################################################
 # Application
