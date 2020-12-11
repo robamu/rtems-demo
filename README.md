@@ -20,6 +20,9 @@ this repository:
 git submodule init
 git submodule update
 ``` 
+This will clone the application RTEMS `waf` and `CMake` support,
+`CMake` itself, and the sources for both RTEMS and the RSB in the
+toolchain folder.
 
 
 ## Demo Application
