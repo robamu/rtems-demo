@@ -3,15 +3,27 @@ cmake_minimum_required(VERSION 3.15)
 project(hello)
 add_executable(${CMAKE_PROJECT_NAME})
 
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
+
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
 
 ################################################################################
 # Generic Project configuration
 ################################################################################
 
-if(NOT CMAKE_BUILD_TYPE)
-	# Possible options: Release, Debug, RelWithDebInfo and MinSizeRel
-	set(CMAKE_BUILD_TYPE RelWithDebInfo)
+# Set a default build type if none was specified
+set(DEFAULT_BUILD_TYPE "RelWithDebInfo")
+
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message(STATUS 
+  	"Setting build type to '${DEFAULT_BUILD_TYPE}' as"
+  	" none was specified."
+  )
+  set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE
+      STRING "Choose the type of build." FORCE)
+  # Set the possible values of build type for cmake-gui
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
+    "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
 
 ################################################################################
@@ -27,12 +39,15 @@ if(NOT RTEMS_CONFIG_DIRECTORY)
 endif()
 
 if(NOT EXISTS ${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake) 
-	message(FATAL_ERROR "RTEMS configuration not found at ${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake")
+	message(FATAL_ERROR 
+		"RTEMS configuration not found at "
+		"${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake"
+	)
 endif()
 
 # Sanity checks
-if(NOT RTEMS_TOOLS)
-	message(FATAL_ERROR "No RTEMS tools path supplied!")
+if(NOT RTEMS_PREFIX)
+	message(FATAL_ERROR "No RTEMS prefix supplied!")
 endif()
 
 if(NOT RTEMS_BSP)
@@ -40,11 +55,7 @@ if(NOT RTEMS_BSP)
 endif()
 
 include("${RTEMS_CONFIG_DIRECTORY}/RTEMSConfig.cmake")
-if(DEFINED RTEMS_BSP_PATH)
-rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP} ${RTEMS_BSP_PATH})
-else()
-rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_TOOLS} ${RTEMS_BSP})
-endif()
+rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_PREFIX} ${RTEMS_BSP})
 
 
 ################################################################################
