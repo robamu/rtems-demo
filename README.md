@@ -13,6 +13,15 @@ Those can be used by running
 source path_setter_v6
 ``` 
 
+Also, don't forget to clone the submodules if you want to try out
+this repository:
+
+```sh
+git submodule init
+git submodule update
+``` 
+
+
 ## Demo Application
 
 ### Build demo application
