@@ -1,7 +1,17 @@
 cmake_minimum_required(VERSION 3.15) 
 
+set(CMAKE_SYSTEM_NAME Generic)
+set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
+set(CMAKE_C_COMPILER_WORKS 1)
+set(CMAKE_CXX_COMPILER_WORKS 1)
+set(CMAKE_CROSSCOMPILING 1)
+
 project(blinky)
+
 add_executable(${CMAKE_PROJECT_NAME})
+
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
 
 ################################################################################
 # Generic Project configuration
