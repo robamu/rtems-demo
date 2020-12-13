@@ -37,7 +37,7 @@ endif()
 ################################################################################
 
 set(RTEMS_CONFIG_DIR 
-	"${CMAKE_CURRENT_SOURCE_DIR}/../rtems-cmake" 
+	"${CMAKE_CURRENT_SOURCE_DIR}/../../rtems-cmake" 
 	CACHE FILEPATH 
 	"Directory containing the RTEMS *.cmake files"
 )
