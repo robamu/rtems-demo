@@ -9,6 +9,7 @@ toolchain if required.
 There is a small helper file I use to configure the system path
 called `path_setter_v<VersionNumber>` . 
 Those can be used by running
+
 ```sh
 source path_setter_v6
 ``` 
@@ -19,11 +20,14 @@ this repository:
 ```sh
 git submodule init
 git submodule update
-``` 
-This will clone the application RTEMS `waf` and `CMake` support,
-`waf` itself, and the sources for both RTEMS and the RSB in the
-toolchain folder.
+```
 
+This will clone the application RTEMS `waf` and `CMake` support,
+`waf` itself
+
+I am going to assume that the RTEMS tools (e.g. cross compilers) and BSPs were already installed.
+If this is not the case, it is recommended to clone the [toolchain repository](https://github.com/rmspacefish/rtems-tools.git) in the same folder this demo repository was
+cloned and following the steps in the `README` to install all required tools and BSPs.
 
 ## Demo Application
 
