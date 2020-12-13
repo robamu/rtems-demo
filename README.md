@@ -22,7 +22,7 @@ git submodule init
 git submodule update
 ```
 
-This will clone the application RTEMS `waf` and `CMake` support,
+This will clone the application RTEMS `waf` and `CMake` support and 
 `waf` itself
 
 I am going to assume that the RTEMS tools (e.g. cross compilers) and BSPs were already installed.
