@@ -70,3 +70,9 @@ target_sources(${CMAKE_PROJECT_NAME}
 		led.c 
 		stm32h7xx_nucleo.c
 )
+
+add_custom_command(
+	TARGET ${CMAKE_PROJECT_NAME}
+	POST_BUILD
+	COMMAND ${RTEMS_OBJCOPY} -O binary ${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.bin
+)
