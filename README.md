@@ -1,4 +1,4 @@
-# RTEMS Test Repository
+# RTEMS Demo Repository
 
 Just a personal test repository to get familiar with RTEMS.
 I configured and built the RTEMS toolchain in the same path in
