@@ -74,5 +74,12 @@ target_sources(${CMAKE_PROJECT_NAME}
 add_custom_command(
 	TARGET ${CMAKE_PROJECT_NAME}
 	POST_BUILD
+	COMMAND echo "Generating binary file ${CMAKE_PROJECT_NAME}.bin.."
 	COMMAND ${RTEMS_OBJCOPY} -O binary ${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.bin
+)
+
+add_custom_command(
+    TARGET ${CMAKE_PROJECT_NAME}
+    POST_BUILD
+    COMMAND ${RTEMS_SIZE} ${CMAKE_PROJECT_NAME}
 )
