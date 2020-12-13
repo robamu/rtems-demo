@@ -1,14 +1,6 @@
 [submodule "applications/rtems_waf"]
 	path = applications/rtems_waf
 	url = git://git.rtems.org/rtems_waf.git
-[submodule "toolchain/src/rtems"]
-	path = toolchain/src/rtems
-	url = https://github.com/rmspacefish/rtems.git
-	ignore = dirty
-[submodule "toolchain/src/rsb"]
-	path = toolchain/src/rsb
-	url = https://github.com/rmspacefish/rtems-source-builder.git
-	ignore = dirty
 [submodule "applications/stm32/blinky/waf"]
 	path = applications/stm32/blinky/waf
 	url = https://gitlab.com/ita1024/waf.git
