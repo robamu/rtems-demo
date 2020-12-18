@@ -1,3 +1,4 @@
-export PATH="$PATH":$(pwd)/../rtems-tools/rtems/5/bin
-export RTEMS_TOOLS=$(pwd)/../rtems-tools/rtems/5
+export RTEMS_VERSION=5
 
+export PATH="$PATH":"$(pwd)/../rtems-tools/rtems/$RTEMS_VERSION/bin"
+export RTEMS_TOOLS="$(pwd)/../rtems-tools/rtems/$RTEMS_VERSION"

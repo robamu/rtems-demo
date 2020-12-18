@@ -21,3 +21,4 @@ toolchain/build
 !**/eclipse/.project
 !**/eclipse/.cproject
 !**/eclipse/.pydevproject
+/bin/
