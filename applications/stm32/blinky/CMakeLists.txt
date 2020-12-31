@@ -64,7 +64,7 @@ add_custom_command(
    POST_BUILD
    COMMAND echo "RTEMS version: ${RTEMS_VERSION}"
    COMMAND echo "Built for RTEMS BSP: ${RTEMS_BSP}"
-   COMMAND echo "Target build type ${CMAKE_BUILD_TYPE}"
+   COMMAND echo "Target build type: ${CMAKE_BUILD_TYPE}"
    COMMAND ${CMAKE_SIZE} ${CMAKE_PROJECT_NAME}
 )
 
