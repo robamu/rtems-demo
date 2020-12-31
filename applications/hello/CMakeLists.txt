@@ -54,8 +54,18 @@ include("${RTEMS_CONFIG_DIR}/BuildType.cmake")
 set_build_type()
 
 add_custom_command(
+	TARGET ${CMAKE_PROJECT_NAME}
+	POST_BUILD
+	COMMAND echo "Generating binary file ${CMAKE_PROJECT_NAME}.bin"
+	COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.bin
+)
+
+add_custom_command(
     TARGET ${CMAKE_PROJECT_NAME}
     POST_BUILD
+    COMMAND echo "RTEMS version: ${RTEMS_VERSION}"
+    COMMAND echo "Built for RTEMS BSP: ${RTEMS_BSP}"
+    COMMAND echo "Target build type ${CMAKE_BUILD_TYPE}"
     COMMAND ${CMAKE_SIZE} ${CMAKE_PROJECT_NAME}
 )
 
