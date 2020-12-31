@@ -14,7 +14,7 @@ rtems_task Init(rtems_task_argument argument) {
 	BSP_LED_Init(LED3);
 
 	while (1) {
-		(void) rtems_task_wake_after( 1 * rtems_clock_get_ticks_per_second() );
+		(void) rtems_task_wake_after( 0.3 * rtems_clock_get_ticks_per_second() );
 		BSP_LED_Toggle(LED1);
 		BSP_LED_Toggle(LED2);
 		BSP_LED_Toggle(LED3);
