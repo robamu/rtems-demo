@@ -1,68 +1,46 @@
 cmake_minimum_required(VERSION 3.15) 
 
-set(CMAKE_SYSTEM_NAME Generic)
-set(CMAKE_C_COMPILER_WORKS 1)
-set(CMAKE_CXX_COMPILER_WORKS 1)
-set(CMAKE_CROSSCOMPILING 1)
+set(RTEMS_VERBOSE FALSE)
 
-project(blinky)
-
-add_executable(${CMAKE_PROJECT_NAME})
-
-set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
-install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
-
-################################################################################
-# Generic Project configuration
-################################################################################
-
-# Set a default build type if none was specified
-set(DEFAULT_BUILD_TYPE "RelWithDebInfo")
-
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message(STATUS 
-  	"Setting build type to '${DEFAULT_BUILD_TYPE}' as"
-  	" none was specified."
-  )
-  set(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE
-      STRING "Choose the type of build." FORCE)
-  # Set the possible values of build type for cmake-gui
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
-    "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
-endif()
-
-################################################################################
-# Load RTEMS configuration and checks
-################################################################################
-
-set(RTEMS_CONFIG_DIR
-	"${CMAKE_CURRENT_SOURCE_DIR}/../../../rtems-cmake"
-	 CACHE FILEPATH "Directory containing the RTEMS *.cmake files"
+set(RTEMS_CONFIG_DIR 
+	"${CMAKE_CURRENT_SOURCE_DIR}/../../../rtems-cmake" 
+	CACHE FILEPATH 
+	"Directory containing the RTEMS *.cmake files"
 )
 
-if(NOT EXISTS ${RTEMS_CONFIG_DIR}/RTEMSConfig.cmake) 
-	message(FATAL_ERROR 
-		"RTEMS configuration not found at"
-		"${RTEMS_CONFIG_DIR}/RTEMSConfig.cmake"
-	)
-endif()
-
+################################################################################
+# Load RTEMS pre-project configuration and checks
+################################################################################
 # Sanity checks
 if(NOT RTEMS_PREFIX)
-	message(FATAL_ERROR "No RTEMS prefix supplied!")
+	if(NOT DEFINED ENV{RTEMS_BSP})
+		message(FATAL_ERROR "No RTEMS prefix supplied!")
+	else()
+		set(RTEMS_PREFIX $ENV{RTEMS_BSP})
+	endif()
 endif()
 
-if(NOT RTEMS_BSP)
-	message(FATAL_ERROR "No RTEMS BSP pair name supplied!")
+if(NOT DEFINED RTEMS_BSP)
+	if(NOT DEFINED ENV{RTEMS_BSP})
+		message(FATAL_ERROR "No RTEMS BSP pair name supplied!")
+	else()
+		set(RTEMS_BSP $ENV{RTEMS_BSP})
+	endif()
 endif()
 
-include("${RTEMS_CONFIG_DIR}/RTEMSConfig.cmake")
-rtems_general_config(${CMAKE_PROJECT_NAME} ${RTEMS_PREFIX} ${RTEMS_BSP})
+include(${RTEMS_CONFIG_DIR}/RTEMSPreProjectConfig.cmake)
+rtems_pre_project_config(${RTEMS_PREFIX} ${RTEMS_BSP})
+
+set(CMAKE_TOOLCHAIN_FILE ${RTEMS_CONFIG_DIR}/RTEMSToolchain.cmake) 
+
+project(blinky ASM C CXX)
+
+add_executable(${CMAKE_PROJECT_NAME})
 
 ################################################################################
 # Application
 ################################################################################
-		
+
 target_sources(${CMAKE_PROJECT_NAME}
 	PUBLIC
 		init.c 
@@ -70,15 +48,27 @@ target_sources(${CMAKE_PROJECT_NAME}
 		stm32h7xx_nucleo.c
 )
 
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION "bin")
+
+include("${RTEMS_CONFIG_DIR}/BuildType.cmake")
+set_build_type()
+
 add_custom_command(
 	TARGET ${CMAKE_PROJECT_NAME}
 	POST_BUILD
 	COMMAND echo "Generating binary file ${CMAKE_PROJECT_NAME}.bin.."
-	COMMAND ${RTEMS_OBJCOPY} -O binary ${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.bin
+	COMMAND ${CMAKE_OBJCOPY} -O binary ${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}.bin
 )
 
 add_custom_command(
-    TARGET ${CMAKE_PROJECT_NAME}
-    POST_BUILD
-    COMMAND ${RTEMS_SIZE} ${CMAKE_PROJECT_NAME}
+   TARGET ${CMAKE_PROJECT_NAME}
+   POST_BUILD
+   COMMAND ${CMAKE_SIZE} ${CMAKE_PROJECT_NAME}
 )
+
+################################################################################
+# Load RTEMS post-project configuration and checks
+################################################################################
+include("${RTEMS_CONFIG_DIR}/RTEMSPostProjectConfig.cmake")
+rtems_post_project_config()
