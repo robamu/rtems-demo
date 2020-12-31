@@ -22,3 +22,5 @@ toolchain/build
 !**/eclipse/.cproject
 !**/eclipse/.pydevproject
 /bin/
+
+waf3*
