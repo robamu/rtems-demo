@@ -28,12 +28,14 @@ fi
 cd rtems-cmake
 
 build_generator=""
-os_fsfw="linux"
 if [ "${OS}" = "Windows_NT" ]; then
-	build_generator="MinGW Makefiles"
+	build_generator="\"MinGW Makefiles\""
 # Could be other OS but this works for now.
 else
-	build_generator="Unix Makefiles"
+	build_generator="\"Unix Makefiles\""
 fi
 
-python3 cmake_build_config.py -p "${RTEMS_TOOLS}" -t "sparc/erc32" -g "${build_generator}" -b "debug" -s "${source_dir}" 
+python_command="python3 cmake_build_config.py -p "${RTEMS_TOOLS}" -t "sparc/erc32" \
+    -g "${build_generator}" -b "debug" -s "${source_dir}""
+echo "Executing $(pwd)/${python_command}"
+eval "${python_command}"
