@@ -41,11 +41,10 @@ add_executable(${TARGET_NAME})
 # Application
 ################################################################################
 
-target_sources(${TARGET_NAME}
-	PUBLIC
-		init.c 
-		led.c 
-		stm32h7xx_nucleo.c
+add_subdirectory(bsp_stm32)
+
+target_include_directories(${TARGET_NAME} PRIVATE
+	${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}")

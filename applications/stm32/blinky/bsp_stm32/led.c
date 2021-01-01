@@ -1,4 +1,5 @@
 #include "led.h"
+#include <stm32h743xx.h>
 #include <stm32h7xx_hal_gpio.h>
 #include <stm32h7xx_hal_rcc.h>
 
