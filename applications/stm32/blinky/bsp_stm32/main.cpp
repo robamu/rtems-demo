@@ -1,8 +1,13 @@
-#include "stm32h7xx_nucleo.h"
+#include <stm32h7xx_nucleo.h>
+#include <hardware_init.h>
 
 #include <rtems.h>
+#include <stdio.h>
+#include <rtems/console.h>
 
 int main() {
+	hardware_init();
+	printf("Hallo Welt!\n\r");
 	BSP_LED_Init(LED1);
 	BSP_LED_Init(LED2);
 	BSP_LED_Init(LED3);
