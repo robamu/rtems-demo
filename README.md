@@ -82,12 +82,13 @@ cd applications/stm32/blinky
 
 The shell script `build.sh` has been provided to perform all steps at once. 
 
-Alternatively, build with CMake:
+Alternatively, build with CMake add add `-G "MinGW Makefiles"` on Windows
+to generate a Make build system:
 
 ```sh
 mkdir Debug
 cd Debug
-cmake -DRTEMS_TOOLS=$RTEMS_TOOLS -DRTEMS_BSP=arm7/stm32h7 ..
+cmake -DRTEMS_PREFIX=$RTEMS_PREFIX -DRTEMS_BSP=arm7/stm32h7 ..
 cmake --build . 
 ```
 
