@@ -1,10 +1,10 @@
 # RTEMS Demo Repository
 
 Just a personal test repository to get familiar with RTEMS.
-I configured and built the RTEMS toolchain in the same path in
-a folder named toolchain but I do not include them in the repo. 
-The toolchain folder contains instruction on how to build the 
-toolchain if required.
+Assumes that the RTEMS tool suite and the BSP for the targets
+have already been built.
+If this is not the case, [use](https://github.com/rmspacefish/rtems-tools)
+to build them.
 
 There is a small helper file I use to configure the system path
 called `path_setter_v<VersionNumber>` . 
