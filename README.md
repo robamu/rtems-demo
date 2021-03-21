@@ -37,7 +37,9 @@ The demo application is located inside the hello folder in the application folde
 It is compiled and can be run on a host computer with the `erc32-sis` simulator.
 
 After installing the `sparc/erc32` BSP (instruction can be read in toolchain README), perform following steps to build the demo application.
-The `$RTEMS_INST` variable shoulde be set to the RTEMS toolchain location, for example by running `export RTEMS_INST=$(pwd)/toolchain/rtems/6`
+The `$RTEMS_INST` variable shoulde be set to the RTEMS toolchain location, for example by running `export RTEMS_INST=$(pwd)/toolchain/rtems/6`.
+On Windows, MinGW Makefiles are used and `-G "MinGW Makefiles"` has to be supplied to
+the CMake build generator command (before the `..`)
 
 ```sh
 cd applications/hello
@@ -50,7 +52,7 @@ Alternatively, build with CMake:
 ```sh
 mkdir Debug
 cd Debug
-cmake -DRTEMS_INST=$RTEMS_TOOLS -DRTEMS_BSP=sparc/erc32 ..
+cmake -DRTEMS_PREFIX=$RTEMS_PREFIX -DRTEMS_BSP=sparc/erc32 ..
 cmake --build . 
 ```
 
