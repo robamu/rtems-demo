@@ -31,6 +31,16 @@ cloned and following the steps in the `README` to install all required tools and
 
 ## Demo Application
 
+On Windows, it is recommended to install [MSYS2](https://www.msys2.org/) first
+and run the following commands in the MinGW64 shell:
+
+```sh
+pacman -Syuuu
+pacman -S gcc git mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw-w64-x86_64-cmake
+```
+
+This will enable to build applications with MinGW Makefiles.
+
 ### Build demo application
 
 The demo application is located inside the hello folder in the application folder.
