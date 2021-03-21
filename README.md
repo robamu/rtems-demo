@@ -3,8 +3,8 @@
 Just a personal test repository to get familiar with RTEMS.
 Assumes that the RTEMS tool suite and the BSP for the targets
 have already been built.
-If this is not the case, [use](https://github.com/rmspacefish/rtems-tools)
-to build them.
+If this is not the case, [you should build them first](https://github.com/rmspacefish/rtems-tools). This repostiory shows
+how to build simple applications with `waf` or `CMake`.
 
 There is a small helper file I use to configure the system path
 called `path_setter_v<VersionNumber>` . 
