@@ -1,6 +1,15 @@
 build
+
+# CMake ignores
 Debug
+Debug*
 Release
+Release*
+MinSizeRel
+MinSizeRel*
+RelWithDebInfo
+RelWithDebInfo*
+
 .lock*
 .waf*
 
@@ -21,3 +30,6 @@ toolchain/build
 !**/eclipse/.project
 !**/eclipse/.cproject
 !**/eclipse/.pydevproject
+/bin/
+
+waf3*

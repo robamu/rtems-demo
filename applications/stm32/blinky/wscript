@@ -4,7 +4,7 @@
 from __future__ import print_function
 
 import sys
-sys.path.append('../..')
+sys.path.append('../../..')
 
 rtems_version = "6"
 
@@ -35,8 +35,12 @@ def configure(conf):
 
 def build(bld):
 	rtems.build(bld)
-	root_src = ['init.c', 'led.c']
-	board_src = ['stm32h7xx_nucleo.c']
+	root_src = ['bsp_stm32/init.c', 'bsp_stm32/led.c']
+	board_src = ['bsp_stm32/boardconfig/stm32h7xx_nucleo.c']
+	
+	# Still need to add include paths here
+	
+	
 	target_name = "blinky"
 	target_bin_extension = ".bin"
 	target_elf_extension = ".elf"

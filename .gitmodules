@@ -1,12 +1,12 @@
 [submodule "applications/rtems_waf"]
-	path = applications/rtems_waf
+	path = rtems_waf
 	url = git://git.rtems.org/rtems_waf.git
 [submodule "applications/stm32/blinky/waf"]
 	path = applications/stm32/blinky/waf
 	url = https://gitlab.com/ita1024/waf.git
 [submodule "applications/waf"]
-	path = applications/waf
+	path = waf
 	url = https://gitlab.com/ita1024/waf.git
 [submodule "applications/rtems_cmake"]
-	path = applications/rtems-cmake
+	path = rtems-cmake
 	url = https://github.com/rmspacefish/rtems_cmake.git
