@@ -1,5 +1,3 @@
-#include "led.h"
-
 #include <stdio.h>
 #include <bsp.h>
 #include <rtems.h>
