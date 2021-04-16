@@ -37,7 +37,7 @@ fi
 
 echo "Running command (without the leading +):"
 set -x # Print command 
-python3 cmake_build_config.py -p "${RTEMS_TOOLS}" -t "arm/stm32h7" -g "${build_generator}" \ 
+python3 cmake_build_config.py -p "${RTEMS_PREFIX}" -t "arm/stm32h7" -g "${build_generator}" \
         -b "debug" -s "${source_dir}"
 # Use this if commands are added which should not be printed
 # set +x
