@@ -10,3 +10,6 @@
 [submodule "applications/rtems_cmake"]
 	path = rtems-cmake
 	url = https://github.com/rmspacefish/rtems_cmake.git
+[submodule "applications/stm32/lwip/rtems-lwip"]
+	path = applications/stm32/lwip/rtems-lwip
+	url = https://github.com/rmspacefish/rtems-lwip.git
