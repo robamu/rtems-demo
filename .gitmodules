@@ -11,3 +11,6 @@
 	path = rtems-cmake
 	url = https://github.com/rmspacefish/rtems_cmake.git
 
+[submodule "rtems-lwip"]
+	path = rtems-lwip
+	url = https://github.com/rmspacefish/rtems-lwip.git
