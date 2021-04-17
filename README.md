@@ -1,10 +1,10 @@
 # RTEMS Demo Repository
 
 Just a personal test repository to get familiar with RTEMS.
-I configured and built the RTEMS toolchain in the same path in
-a folder named toolchain but I do not include them in the repo. 
-The toolchain folder contains instruction on how to build the 
-toolchain if required.
+Assumes that the RTEMS tool suite and the BSP for the targets
+have already been built.
+If this is not the case, [you should build them first](https://github.com/rmspacefish/rtems-tools). This repository shows
+how to build simple RTEMS applications with `waf` or `CMake`.
 
 There is a small helper file I use to configure the system path
 called `path_setter_v<VersionNumber>` . 
@@ -31,17 +31,29 @@ cloned and following the steps in the `README` to install all required tools and
 
 ## Demo Application
 
+On Windows, it is recommended to install [MSYS2](https://www.msys2.org/) first
+and run the following commands in the MinGW64 shell:
+
+```sh
+pacman -Syuuu
+pacman -S gcc git mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw-w64-x86_64-cmake
+```
+
+This will enable to build applications with MinGW Makefiles.
+
 ### Build demo application
 
 The demo application is located inside the hello folder in the application folder.
 It is compiled and can be run on a host computer with the `erc32-sis` simulator.
 
 After installing the `sparc/erc32` BSP (instruction can be read in toolchain README), perform following steps to build the demo application.
-The `$RTEMS_INST` variable shoulde be set to the RTEMS toolchain location, for example by running `export RTEMS_INST=$(pwd)/toolchain/rtems/6`
+The `$RTEMS_INST` variable shoulde be set to the RTEMS toolchain location, for example by running `export RTEMS_INST=$(pwd)/toolchain/rtems/6`.
+On Windows, MinGW Makefiles are used and `-G "MinGW Makefiles"` has to be supplied to
+the CMake build generator command (before the `..`)
 
 ```sh
 cd applications/hello
-./waf configure --rtems=$RTEMS_TOOLS --rtems-bsp=sparc/erc32
+./waf configure --rtems=$RTEMS_PREFIX --rtems-bsp=sparc/erc32
 ./waf
 ```
 
@@ -50,7 +62,7 @@ Alternatively, build with CMake:
 ```sh
 mkdir Debug
 cd Debug
-cmake -DRTEMS_INST=$RTEMS_TOOLS -DRTEMS_BSP=sparc/erc32 ..
+cmake -DRTEMS_PREFIX=$RTEMS_PREFIX -DRTEMS_BSP=sparc/erc32 ..
 cmake --build . 
 ```
 
@@ -74,18 +86,19 @@ It is assumed that the RTEMS ARM toolchain binaries have been added to the path.
 
 ```sh
 cd applications/stm32/blinky
-./waf configure --rtems=$RTEMS_TOOLS --rtems-bsp=arm/stm32h7
+./waf configure --rtems=$RTEMS_PREFIX --rtems-bsp=arm/stm32h7
 ./waf
 ```
 
 The shell script `build.sh` has been provided to perform all steps at once. 
 
-Alternatively, build with CMake:
+Alternatively, build with CMake add add `-G "MinGW Makefiles"` on Windows
+to generate a Make build system:
 
 ```sh
 mkdir Debug
 cd Debug
-cmake -DRTEMS_TOOLS=$RTEMS_TOOLS -DRTEMS_BSP=arm7/stm32h7 ..
+cmake -DRTEMS_PREFIX=$RTEMS_PREFIX -DRTEMS_BSP=arm7/stm32h7 ..
 cmake --build . 
 ```
 

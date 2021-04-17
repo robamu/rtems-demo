@@ -1,14 +1,7 @@
-build
 
 # CMake ignores
-Debug
-Debug*
-Release
-Release*
-MinSizeRel
-MinSizeRel*
-RelWithDebInfo
-RelWithDebInfo*
+build
+build*
 
 .lock*
 .waf*

@@ -4,9 +4,9 @@
 		<cconfiguration id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.350761513">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="ilg.gnuarmeclipse.managedbuild.cross.toolchain.base.350761513" moduleId="org.eclipse.cdt.core.settings" name="Default">
 				<macros>
-					<stringMacro name="RTEMS_PATH" type="VALUE_PATH_ANY" value="/home/rmueller/Documents/RTEMS/rtems-tools"/>
+					<stringMacro name="RTEMS_PATH" type="VALUE_PATH_ANY" value="${HOME}/RTEMS/rtems-tools"/>
+					<stringMacro name="RTEMS_BSP" type="VALUE_TEXT" value="${RTEMS_PATH}/rtems/6/arm-rtems6/nucleo-h743zi"/>
 					<stringMacro name="RTEMS_BIN" type="VALUE_TEXT" value="${RTEMS_PATH}/rtems/6/bin"/>
-					<stringMacro name="RTEMS_BSP" type="VALUE_TEXT" value="${RTEMS_PATH}/rtems/6/arm-rtems6/stm32h7"/>
 				</macros>
 				<externalSettings/>
 				<extensions>

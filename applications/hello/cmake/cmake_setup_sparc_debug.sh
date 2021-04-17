@@ -2,8 +2,8 @@
 source_dir=$(cd ../ && pwd)
 
 counter=0
-if [ -z "$RTEMS_TOOLS" ]; then
-	echo "RTEMS_TOOLS environmental variable (RTEMS prefix) has to be set!"
+if [ -z "$RTEMS_PREFIX" ]; then
+	echo "RTEMS_PREFIX environmental variable (RTEMS prefix) has to be set!"
 	exit 1
 fi
 
@@ -27,6 +27,7 @@ fi
 
 cd rtems-cmake
 
+builddir="build-Debug"
 build_generator=""
 if [ "${OS}" = "Windows_NT" ]; then
 	build_generator="MinGW Makefiles"
@@ -37,6 +38,7 @@ fi
 
 echo "Running command (without the leading +):"
 set -x # Print command 
-python3 cmake_build_config.py -p "${RTEMS_TOOLS}" -t "arm/stm32h7" -g "${build_generator}" -b "debug" -s "${source_dir}"
+python3 cmake_build_config.py -p "${RTEMS_PREFIX}" -t "sparc/erc32" -g "${build_generator}" \
+        -b "debug" -s "${source_dir}" -l "${builddir}"
 # Use this if commands are added which should not be printed
 # set +x
